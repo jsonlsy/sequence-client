@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+// import { Container, Row, Col } from 'react-bootstrap';
+
 import Players from './components/Players';
 import Board from './components/Board';
 import Hand from './components/Hand';
@@ -36,10 +41,18 @@ function App() {
 
   return (
     <div>
-      <h3>Sequence Client</h3>
-      <Players />
-      <Board />
-      <Hand />
+      <h3>Sequence</h3>
+      <Container>
+        <Row>
+          <Col sm={2}>
+            <Players />
+          </Col>
+          <Col sm={10}>
+            <Board />
+            <Hand />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

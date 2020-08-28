@@ -1,31 +1,30 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Tile from './Tile';
 
 const Board = () => {
   const board = useSelector((state) => state.board);
-  const socket = useSelector((state) => state.socket);
 
   const renderTile = ({ card, color }, key) => (
-    <span key={key}>
-      {card}
-      ::
-      {color}
-    </span>
+    <Col key={key}>
+      <Tile card={card} color={color} />
+    </Col>
   );
 
-  if (!board || !socket) return null;
+  if (!board) return null;
 
   return (
     <div>
       <div>Board:</div>
       {
         board.map((row, rowIndex) => (
-          <div key={`row-${rowIndex}`}>
+          <Row noGutters key={`row-${rowIndex}`}>
             { row.map((tile, colIndex) => renderTile(tile, `${rowIndex}-${colIndex}`)) }
-          </div>
+          </Row>
         ))
       }
-      <button type="button" onClick={() => socket.emit('start')}>Start</button>
     </div>
   );
 };

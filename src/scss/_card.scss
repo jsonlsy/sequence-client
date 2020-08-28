@@ -1,0 +1,21 @@
+.card {
+  padding: 15px;
+
+  &.small {
+    padding: 10px;
+  }
+
+  &.red {
+    background: red;
+    color: white;
+  }
+
+  &.blue {
+    background: blue;
+    color: white;
+  }
+
+  &.selected {
+    background: grey;
+  }
+}

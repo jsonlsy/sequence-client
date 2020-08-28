@@ -1,19 +1,29 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import Card from './Card';
+import { cardString } from '../helpers/cards';
+
 const Hand = () => {
-  const hand = useSelector((state) => state.hand);
+  const cards = useSelector((state) => state.hand.cards);
 
-  if (!hand) return null;
-
-  const cardString = (card) => `${card.rank.shortName} ${card.suit.name}`;
+  if (!cards) return null;
 
   return (
     <div>
       <div>Hand:</div>
-      {
-        hand.map((card) => (<div key={cardString(card)}>{cardString(card)}</div>))
-      }
+      <Row>
+        {
+          cards.map((card) => (
+            <Col key={cardString(card)}>
+              <Card card={card} />
+            </Col>
+          ))
+        }
+      </Row>
     </div>
   );
 };
