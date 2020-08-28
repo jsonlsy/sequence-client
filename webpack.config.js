@@ -3,7 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     devtool: 'source-map',
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
         path: __dirname + '/dist',
         publicPath: '/',
@@ -44,4 +44,7 @@ module.exports = {
     //     {copyUnmodified: false}
     // )
     ],
+    resolve: {
+        extensions: ['.js', '.jsx']
+    }
 };
