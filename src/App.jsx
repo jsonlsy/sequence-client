@@ -10,11 +10,13 @@ import Col from 'react-bootstrap/Col';
 import Players from './components/Players';
 import Board from './components/Board';
 import Hand from './components/Hand';
+import Dashboard from './components/Dashboard';
 
 import { setSocket } from './redux/modules/socket';
 import { updatePlayers } from './redux/modules/players';
 import { updateBoard } from './redux/modules/board';
 import { updateHand } from './redux/modules/hand';
+import { updateStatus } from './redux/modules/status';
 
 const ENDPOINT = 'http://127.0.0.1:8081';
 
@@ -29,6 +31,7 @@ function App() {
       console.log('got gameState event');
       dispatch(updatePlayers(gameState.players));
       dispatch(updateBoard(gameState.board));
+      dispatch(updateStatus(gameState.status));
     });
 
     socket.on('playerCards', (playerCards) => {
@@ -46,6 +49,7 @@ function App() {
         <Row>
           <Col sm={2}>
             <Players />
+            <Dashboard />
           </Col>
           <Col sm={10}>
             <Board />
