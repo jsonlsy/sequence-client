@@ -1,1 +1,1 @@
-export const cardString = (card) => (card ? `${card.rank.shortName}${card.suit.name}` : '');
+export const getCardCode = (card) => (card ? `${card.rank.shortName}${card.suit.name}` : '');

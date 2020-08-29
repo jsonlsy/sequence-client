@@ -1,24 +1,24 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { cardString } from '../helpers/cards';
+import { getCardCode } from '../helpers/cards';
 import { selectCard } from '../redux/modules/hand';
 
 const Card = ({ card }) => {
   const selectedCard = useSelector((state) => state.hand.selected);
   const dispatch = useDispatch();
 
-  const isSelected = selectedCard && (cardString(card) === selectedCard);
+  const isSelected = selectedCard && (getCardCode(card) === selectedCard);
 
   const attrClass = isSelected ? 'selected' : '';
 
   const select = () => {
-    dispatch(selectCard(cardString(card)));
+    dispatch(selectCard(getCardCode(card)));
   };
 
   return (
     <div className={`card ${attrClass}`} onClick={select}>
-      {cardString(card)}
+      {getCardCode(card)}
     </div>
   );
 };

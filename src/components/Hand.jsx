@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Card from './Card';
-import { cardString } from '../helpers/cards';
+import { getCardCode } from '../helpers/cards';
 
 const Hand = () => {
   const cards = useSelector((state) => state.hand.cards);
@@ -18,7 +18,7 @@ const Hand = () => {
       <Row>
         {
           cards.map((card) => (
-            <Col key={cardString(card)}>
+            <Col key={getCardCode(card)}>
               <Card card={card} />
             </Col>
           ))

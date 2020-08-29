@@ -7,9 +7,9 @@ import Tile from './Tile';
 const Board = () => {
   const board = useSelector((state) => state.board);
 
-  const renderTile = ({ card, color }, key) => (
-    <Col key={key}>
-      <Tile card={card} color={color} />
+  const renderTile = ({ cardCode, color }, rowIndex, colIndex) => (
+    <Col key={`${rowIndex}-${colIndex}`}>
+      <Tile cardCode={cardCode} color={color} rowIndex={rowIndex} colIndex={colIndex} />
     </Col>
   );
 
@@ -21,7 +21,7 @@ const Board = () => {
       {
         board.map((row, rowIndex) => (
           <Row noGutters key={`row-${rowIndex}`}>
-            { row.map((tile, colIndex) => renderTile(tile, `${rowIndex}-${colIndex}`)) }
+            { row.map((tile, colIndex) => renderTile(tile, rowIndex, colIndex)) }
           </Row>
         ))
       }

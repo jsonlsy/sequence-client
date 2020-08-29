@@ -1,10 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Tile = ({ card, color }) => {
-  const selectedCard = useSelector((state) => state.hand.selected);
+import { selectCard } from '../redux/modules/hand';
 
-  const isSelected = card && selectedCard && (card === selectedCard);
+const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
+  const selectedCardCode = useSelector((state) => state.hand.selected);
+  const socket = useSelector((state) => state.socket);
+  const dispatch = useDispatch();
+
+  const play = () => {
+    socket.emit('play', { cardCode: selectedCardCode, rowIndex, colIndex });
+    dispatch(selectCard(null));
+  };
+
+  const isSelected = cardCode && selectedCardCode && (cardCode === selectedCardCode);
 
   let attrClass;
   if (color) {
@@ -13,9 +22,12 @@ const Tile = ({ card, color }) => {
     attrClass = 'selected';
   }
 
+  // TODO: check for turn
+  attrClass += ' cursor-pointer';
+
   return (
-    <div className={`card ${attrClass}`}>
-      {card}
+    <div className={`card ${attrClass}`} onClick={play}>
+      {cardCode}
     </div>
   );
 };
