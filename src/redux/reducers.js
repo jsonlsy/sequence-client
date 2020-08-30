@@ -7,6 +7,7 @@ import { reducer as handReducer } from './modules/hand';
 import { reducer as statusReducer } from './modules/status';
 import { reducer as turnReducer } from './modules/turn';
 import { reducer as winnerReducer } from './modules/winner';
+import { reducer as roomReducer } from './modules/room';
 
 const reducers = combineReducers({
   socket: socketReducer,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   status: statusReducer,
   turn: turnReducer,
   winner: winnerReducer,
+  room: roomReducer,
 });
 
 export default reducers;
