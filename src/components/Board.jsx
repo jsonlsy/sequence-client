@@ -6,6 +6,8 @@ import Tile from './Tile';
 
 const Board = () => {
   const board = useSelector((state) => state.board);
+  const turnToPlay = useSelector((state) => state.turn.turnToPlay);
+  const status = useSelector((state) => state.status);
 
   const renderTile = ({ cardCode, color }, rowIndex, colIndex) => (
     <Col key={`${rowIndex}-${colIndex}`}>
@@ -18,13 +20,16 @@ const Board = () => {
   return (
     <div>
       <div>Board:</div>
-      {
-        board.map((row, rowIndex) => (
-          <Row noGutters key={`row-${rowIndex}`}>
-            { row.map((tile, colIndex) => renderTile(tile, rowIndex, colIndex)) }
-          </Row>
-        ))
-      }
+      <div className="board">
+        <div className={turnToPlay && !status.paused ? '' : 'disabled-layer' } />
+        {
+          board.map((row, rowIndex) => (
+            <Row noGutters key={`row-${rowIndex}`}>
+              { row.map((tile, colIndex) => renderTile(tile, rowIndex, colIndex)) }
+            </Row>
+          ))
+        }
+      </div>
     </div>
   );
 };

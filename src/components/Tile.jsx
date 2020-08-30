@@ -8,22 +8,20 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
   const socket = useSelector((state) => state.socket);
   const dispatch = useDispatch();
 
+  const isSelected = cardCode && selectedCardCode && (cardCode === selectedCardCode);
+
   const play = () => {
+    if (!isSelected) return;
     socket.emit('play', { cardCode: selectedCardCode, rowIndex, colIndex });
     dispatch(selectCard(null));
   };
-
-  const isSelected = cardCode && selectedCardCode && (cardCode === selectedCardCode);
 
   let attrClass;
   if (color) {
     attrClass = color;
   } else if (isSelected) {
-    attrClass = 'selected';
+    attrClass = 'selected cursor-pointer';
   }
-
-  // TODO: check for turn
-  attrClass += ' cursor-pointer';
 
   return (
     <div className={`card ${attrClass}`} onClick={play}>

@@ -11,7 +11,7 @@ const Players = () => {
       <div>Players:</div>
       {
         Object.keys(players).map((player) => (
-          <div key={player}>{player}</div>
+          <div key={player}><span>></span> {player}</div>
         ))
       }
     </div>
