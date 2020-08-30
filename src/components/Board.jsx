@@ -8,6 +8,7 @@ const Board = () => {
   const board = useSelector((state) => state.board);
   const turnToPlay = useSelector((state) => state.turn.turnToPlay);
   const status = useSelector((state) => state.status);
+  const winner = useSelector((state) => state.winner);
 
   const renderTile = ({ cardCode, color }, rowIndex, colIndex) => (
     <Col key={`${rowIndex}-${colIndex}`}>
@@ -21,7 +22,7 @@ const Board = () => {
     <div>
       <div>Board:</div>
       <div className="board">
-        <div className={turnToPlay && !status.paused ? '' : 'disabled-layer' } />
+        <div className={turnToPlay && !status.paused && !winner ? '' : 'disabled-layer'} />
         {
           board.map((row, rowIndex) => (
             <Row noGutters key={`row-${rowIndex}`}>

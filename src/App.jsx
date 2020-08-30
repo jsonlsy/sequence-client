@@ -15,9 +15,10 @@ import Dashboard from './components/Dashboard';
 import { setSocket } from './redux/modules/socket';
 import { updatePlayers } from './redux/modules/players';
 import { updateBoard } from './redux/modules/board';
-import { updateHand } from './redux/modules/hand';
+import { updateHand, selectCard } from './redux/modules/hand';
 import { updateStatus } from './redux/modules/status';
 import { updateTurnToPlay } from './redux/modules/turn';
+import { updateWinner } from './redux/modules/winner';
 
 const ENDPOINT = 'http://127.0.0.1:8081';
 
@@ -31,15 +32,18 @@ function App() {
     socket.on('gameState', (gameState) => {
       console.log('got gameState event');
       console.log(gameState);
-      console.log(socket.id);
       dispatch(updatePlayers(gameState.players));
       dispatch(updateBoard(gameState.board));
       dispatch(updateStatus(gameState.status));
       dispatch(updateTurnToPlay(gameState.turn === socket.id));
+      if (gameState.winner) {
+        dispatch(updateWinner(gameState.winner));
+      }
     });
 
     socket.on('playerCards', (playerCards) => {
       console.log('got playerCards event');
+      dispatch(selectCard(null));
       dispatch(updateHand(playerCards));
     });
 
