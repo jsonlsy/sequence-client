@@ -22,18 +22,18 @@ import { updateWinner } from './redux/modules/winner';
 
 const ENDPOINT = 'http://127.0.0.1:8081';
 
-const Game = ({ room }) => {
+const Game = ({ room, playerName }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const socket = socketIOClient(ENDPOINT, { room });
+    const socket = socketIOClient(ENDPOINT, { query: { room, playerName } });
 
     socket.on('connect', () => {
       dispatch(setSocket(socket));
-      if (!room) {
-        // TODO: consider using react router
-        history.pushState('', '', `?room=${socket.id}`);
-      }
+      // if (!room) {
+      //   // TODO: consider using react router
+      //   history.pushState('', '', `?room=${socket.id}`);
+      // }
 
       socket.on('gameState', (gameState) => {
         console.log('got gameState event');
@@ -55,7 +55,7 @@ const Game = ({ room }) => {
     });
 
     return () => socket.disconnect();
-  });
+  }, []);
 
   return (
     <div>

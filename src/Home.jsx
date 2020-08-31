@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { createRoom, joinRoom } from './redux/modules/room';
@@ -9,16 +9,27 @@ const JOIN_MODE = 'join';
 const Home = () => {
   const [mode, setMode] = useState();
   const [room, setRoom] = useState();
+  const [name, setName] = useState();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const roomParam = params.get('room');
+
+    if (roomParam) {
+      setMode(JOIN_MODE);
+      setRoom(roomParam);
+    }
+  }, []);
 
   const submit = (event) => {
     event.preventDefault();
     switch (mode) {
       case NEW_MODE:
-        dispatch(createRoom());
+        dispatch(createRoom(name));
         break;
       case JOIN_MODE:
-        dispatch(joinRoom(room));
+        dispatch(joinRoom(room, name));
         break;
       default:
         break;
@@ -41,14 +52,14 @@ const Home = () => {
             {
               mode && (
                 <Form.Group>
-                  <Form.Control type="text" placeholder="Name" required />
+                  <Form.Control type="text" placeholder="Name" required onChange={(e) => setName(e.target.value)} />
                 </Form.Group>
               )
             }
             {
               mode === 'join' && (
                 <Form.Group>
-                  <Form.Control type="text" placeholder="Room" required onChange={(e) => setRoom(e.target.value)} />
+                  <Form.Control type="text" placeholder="Room" required value={room} onChange={(e) => setRoom(e.target.value)} />
                 </Form.Group>
               )
             }
