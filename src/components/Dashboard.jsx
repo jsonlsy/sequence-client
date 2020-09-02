@@ -34,7 +34,7 @@ const Dashboard = () => {
       </div>
       <div>
         <span>Share link: </span>
-        <span>{ shareLink }</span>
+        <small>{ shareLink }</small>
       </div>
       { !status.started && <button type="button" onClick={() => socket.emit('start')}>Start</button> }
       { status.started && <button type="button" onClick={() => socket.emit('reset')}>Reset</button> }

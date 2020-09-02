@@ -41,7 +41,7 @@ const Game = ({ room, playerName }) => {
         dispatch(updatePlayers(gameState.players));
         dispatch(updateBoard(gameState.board));
         dispatch(updateStatus(gameState.status));
-        dispatch(updateTurnToPlay(gameState.turn === socket.id));
+        dispatch(updateTurnToPlay(gameState.turn, gameState.turn === socket.id));
         if (gameState.winner) {
           dispatch(updateWinner(gameState.winner));
         }
