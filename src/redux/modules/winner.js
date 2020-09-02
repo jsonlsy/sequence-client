@@ -1,9 +1,9 @@
 const UPDATE = 'sequence/winner/UPDATE';
 
-export const reducer = (state = null, action = {}) => {
+export const reducer = (state = {}, action = {}) => {
   switch (action.type) {
     case UPDATE:
-      return action.winner;
+      return { winner: action.winner };
     default:
       return state;
   }

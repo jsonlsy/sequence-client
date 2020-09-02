@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
   const status = useSelector((state) => state.status);
   const socket = useSelector((state) => state.socket);
-  const winner = useSelector((state) => state.winner);
+  const winner = useSelector((state) => state.winner.winner);
   const room = useSelector((state) => state.room);
+  const players = useSelector((state) => state.players);
 
   if (!status || !socket) return null;
 
-  console.log(window.location);
   const roomId = room.set ? room.room || socket.id : null;
-  console.log(roomId);
   const shareLink = `${window.location.origin}?room=${roomId}`;
 
   let displayStatus;
@@ -25,6 +24,17 @@ const Dashboard = () => {
     displayStatus = 'Not started';
   }
 
+  const renderStartButton = () => {
+    const nPlayers = Object.keys(players).length;
+    const hasEvenPlayers = nPlayers % 2 === 0;
+    return (
+      <div>
+        { !status.started && <button type="button" disabled={!hasEvenPlayers} onClick={() => socket.emit('start')}>Start</button> }
+        { !hasEvenPlayers && <div>An even number of players required</div>}
+      </div>
+    );
+  };
+
   return (
     <div>
       <div>Dashboard:</div>
@@ -36,7 +46,7 @@ const Dashboard = () => {
         <span>Share link: </span>
         <small>{ shareLink }</small>
       </div>
-      { !status.started && <button type="button" onClick={() => socket.emit('start')}>Start</button> }
+      { renderStartButton() }
       { status.started && <button type="button" onClick={() => socket.emit('reset')}>Reset</button> }
     </div>
   );

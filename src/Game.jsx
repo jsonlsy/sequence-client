@@ -42,9 +42,7 @@ const Game = ({ room, playerName }) => {
         dispatch(updateBoard(gameState.board));
         dispatch(updateStatus(gameState.status));
         dispatch(updateTurnToPlay(gameState.turn, gameState.turn === socket.id));
-        if (gameState.winner) {
-          dispatch(updateWinner(gameState.winner));
-        }
+        dispatch(updateWinner(gameState.winner));
       });
 
       socket.on('playerCards', (playerCards) => {

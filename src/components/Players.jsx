@@ -19,7 +19,6 @@ const Players = () => {
   };
 
   if (!players) return null;
-  console.log(players);
   return (
     <div>
       <div>Players:</div>

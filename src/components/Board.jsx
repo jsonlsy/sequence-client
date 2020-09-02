@@ -8,7 +8,7 @@ const Board = () => {
   const board = useSelector((state) => state.board);
   const turnToPlay = useSelector((state) => state.turn.turnToPlay);
   const status = useSelector((state) => state.status);
-  const winner = useSelector((state) => state.winner);
+  const winner = useSelector((state) => state.winner.winner);
 
   const renderTile = ({ cardCode, color }, rowIndex, colIndex) => (
     <Col key={`${rowIndex}-${colIndex}`}>
