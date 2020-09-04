@@ -59,20 +59,22 @@ const Game = ({ room, playerName }) => {
     <div className="py-3">
       <Container>
         <Row>
-          <Col sm={3}>
-            <div className="mb-2">
+          <Col sm={4}>
+            <div className="mb-3">
               <Dashboard />
             </div>
-            <Players />
-          </Col>
-          <Col sm={9}>
-            <Board />
+            <div className="mb-3">
+              <Players />
+            </div>
             <Hand />
+          </Col>
+          <Col sm={8}>
+            <Board />
           </Col>
         </Row>
       </Container>
     </div>
   );
-}
+};
 
 export default Game;

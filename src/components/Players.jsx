@@ -19,9 +19,7 @@ const Players = () => {
   if (!players) return null;
   return (
     <Card>
-      <Card.Body>
-        <h5 className="m-0">Players</h5>
-      </Card.Body>
+      <div className="card-header">Players</div>
       <ListGroup variant="flush">
         {
           Object.keys(players).map((playerId) => (

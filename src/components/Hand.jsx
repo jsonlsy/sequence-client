@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
-import Card from './Card';
+import { default as PlayingCard } from './Card';
 
 const Hand = () => {
   const cards = useSelector((state) => state.hand.cards);
@@ -12,18 +13,22 @@ const Hand = () => {
   if (!cards) return null;
 
   return (
-    <div>
-      <div>Hand:</div>
-      <Row className="justify-content-center">
-        {
-          cards.map((card, i) => (
-            <Col key={i} sm="auto">
-              <Card card={card} />
-            </Col>
-          ))
-        }
-      </Row>
-    </div>
+    <Card>
+      <div className="card-header">Your cards</div>
+      <Card.Body>
+        <Row noGutters>
+          {
+            cards.map((card, i) => (
+              <Col key={i} sm="auto">
+                <div className="m-1">
+                  <PlayingCard card={card} />
+                </div>
+              </Col>
+            ))
+          }
+        </Row>
+      </Card.Body>
+    </Card>
   );
 };
 

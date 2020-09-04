@@ -2,16 +2,14 @@
   border: 2px solid transparent;
   border-radius: 0.25rem;
 
-  &.small {
-    // height: 100px;
-    // width: 71.5px;
-    height: 80px;
-    width: 57.2px;
-    margin: auto;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
+  // height: 100px;
+  // width: 71.5px;
+  height: 80px;
+  width: 57.2px;
+  margin: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 
   &.bordered {
     border: 1px solid lightgray;
