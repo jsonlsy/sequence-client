@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import { selectCard } from '../redux/modules/hand';
 import { isWildcard, isRemove } from '../helpers/cards';
@@ -23,18 +25,21 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
     dispatch(selectCard(null));
   };
 
-  let attrClass = '';
-  if (color) {
-    attrClass += color;
-  }
-
-  if (isSelected) {
-    attrClass += ' selected cursor-pointer';
-  }
+  const attrClass = isSelected ? 'selected cursor-pointer' : '';
 
   return (
-    <div className={`card ${attrClass}`} onClick={play}>
-      {cardCode}
+    <div className="board-card-container">
+      <div
+        className={`playing-card small ${attrClass}`}
+        onClick={play}
+        style={{ backgroundImage: `url(/assets/cards/${cardCode}.svg)` }}
+      >
+        <Row className="h-100 align-items-center justify-content-center">
+          <Col sm="auto">
+            { color && <div className={`token ${color}`} /> }
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 };

@@ -14,10 +14,10 @@ const Hand = () => {
   return (
     <div>
       <div>Hand:</div>
-      <Row>
+      <Row className="justify-content-center">
         {
           cards.map((card, i) => (
-            <Col key={i}>
+            <Col key={i} sm="auto">
               <Card card={card} />
             </Col>
           ))

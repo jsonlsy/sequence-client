@@ -17,9 +17,11 @@ const Card = ({ card }) => {
   };
 
   return (
-    <div className={`card ${attrClass}`} onClick={select}>
-      {getCardCode(card)}
-    </div>
+    <div
+      className={`playing-card small bordered ${attrClass}`}
+      onClick={select}
+      style={{ backgroundImage: `url(/assets/cards/${getCardCode(card)}.svg)` }}
+    />
   );
 };
 

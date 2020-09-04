@@ -11,7 +11,7 @@ const Board = () => {
   const winner = useSelector((state) => state.winner.winner);
 
   const renderTile = ({ cardCode, color }, rowIndex, colIndex) => (
-    <Col key={`${rowIndex}-${colIndex}`}>
+    <Col key={`${rowIndex}-${colIndex}`} sm="auto">
       <Tile cardCode={cardCode} color={color} rowIndex={rowIndex} colIndex={colIndex} />
     </Col>
   );
@@ -25,7 +25,7 @@ const Board = () => {
         <div className={turnToPlay && !status.paused && !winner ? '' : 'disabled-layer'} />
         {
           board.map((row, rowIndex) => (
-            <Row noGutters key={`row-${rowIndex}`}>
+            <Row noGutters key={`row-${rowIndex}`} className="justify-content-center">
               { row.map((tile, colIndex) => renderTile(tile, rowIndex, colIndex)) }
             </Row>
           ))

@@ -1,5 +1,7 @@
 .board {
   position: relative;
+  padding: 15px;
+  background: lightgrey;
 
   .disabled-layer {
     background-color: rgba(0, 0, 0, 0.1);
@@ -15,5 +17,9 @@
     .disabled-layer {
       display: none;
     }
+  }
+
+  .board-card-container {
+    padding: 2px;
   }
 }

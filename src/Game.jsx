@@ -57,14 +57,13 @@ const Game = ({ room, playerName }) => {
 
   return (
     <div>
-      <h3>Sequence</h3>
       <Container>
         <Row>
-          <Col sm={2}>
+          <Col sm={3}>
             <Players />
             <Dashboard />
           </Col>
-          <Col sm={10}>
+          <Col sm={9}>
             <Board />
             <Hand />
           </Col>
