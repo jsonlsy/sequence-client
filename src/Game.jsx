@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import socketIOClient from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import { Container, Row, Col } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 
 import Players from './components/Players';
 import Board from './components/Board';
@@ -23,6 +23,17 @@ import { updateWinner } from './redux/modules/winner';
 const ENDPOINT = 'http://127.0.0.1:8081';
 
 const Game = ({ room, playerName }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalMsg, setModalMsg] = useState(null);
+  const closeModal = () => {
+    setModalMsg(null);
+    setShowModal(false);
+  };
+  const openModal = (message) => {
+    setModalMsg(message);
+    setShowModal(true);
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,10 +41,6 @@ const Game = ({ room, playerName }) => {
 
     socket.on('connect', () => {
       dispatch(setSocket(socket));
-      // if (!room) {
-      //   // TODO: consider using react router
-      //   history.pushState('', '', `?room=${socket.id}`);
-      // }
 
       socket.on('gameState', (gameState) => {
         console.log('got gameState event');
@@ -49,6 +56,14 @@ const Game = ({ room, playerName }) => {
         console.log('got playerCards event');
         dispatch(selectCard(null));
         dispatch(updateHand(playerCards));
+      });
+
+      socket.on('gameError', (errorMsg) => {
+        openModal(errorMsg);
+      });
+
+      socket.on('winner', (winner) => {
+        openModal(`${winner} team won!`);
       });
     });
 
@@ -73,6 +88,10 @@ const Game = ({ room, playerName }) => {
           </Col>
         </Row>
       </Container>
+
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton>{modalMsg}</Modal.Header>
+      </Modal>
     </div>
   );
 };
