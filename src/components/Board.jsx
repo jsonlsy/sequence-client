@@ -20,7 +20,6 @@ const Board = () => {
 
   return (
     <div>
-      <div>Board:</div>
       <div className="board">
         <div className={turnToPlay && !status.paused && !winner ? '' : 'disabled-layer'} />
         {

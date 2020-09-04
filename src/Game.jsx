@@ -56,12 +56,14 @@ const Game = ({ room, playerName }) => {
   }, []);
 
   return (
-    <div>
+    <div className="py-3">
       <Container>
         <Row>
           <Col sm={3}>
+            <div className="mb-2">
+              <Dashboard />
+            </div>
             <Players />
-            <Dashboard />
           </Col>
           <Col sm={9}>
             <Board />

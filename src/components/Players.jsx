@@ -1,38 +1,40 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const Players = () => {
   const players = useSelector((state) => state.players);
   const turn = useSelector((state) => state.turn.turn);
   const socket = useSelector((state) => state.socket);
 
-  const turnIndicator = (playerId) => {
-    if (turn && turn === playerId) {
-      return (<span>&lt;</span>);
-    }
-  };
+  const isTurn = (playerId) => turn && turn === playerId;
 
   const currentPlayerIndicator = (playerId) => {
     if (socket && socket.id === playerId) {
-      return (<span>(You)</span>);
+      return (<small>(You)</small>);
     }
   };
 
   if (!players) return null;
   return (
-    <div>
-      <div>Players:</div>
-      {
-        Object.keys(players).map((playerId) => (
-          <div key={playerId}>
-            { players[playerId].name }
-            ({ players[playerId].color })
-            { currentPlayerIndicator(playerId) }
-            { turnIndicator(playerId) }
-          </div>
-        ))
-      }
-    </div>
+    <Card>
+      <Card.Body>
+        <h5 className="m-0">Players</h5>
+      </Card.Body>
+      <ListGroup variant="flush">
+        {
+          Object.keys(players).map((playerId) => (
+            <ListGroup.Item key={playerId} variant={isTurn(playerId) ? 'success' : ''}>
+              <span className={`color-${players[playerId].color} pr-1`}>
+                { players[playerId].name }
+              </span>
+              { currentPlayerIndicator(playerId) }
+            </ListGroup.Item>
+          ))
+        }
+      </ListGroup>
+    </Card>
   );
 };
 
