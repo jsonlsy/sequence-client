@@ -20,7 +20,7 @@ import { updateStatus } from './redux/modules/status';
 import { updateTurnToPlay } from './redux/modules/turn';
 import { updateWinner } from './redux/modules/winner';
 
-const ENDPOINT = 'http://127.0.0.1:8081';
+const ENDPOINT = process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : '';
 
 const Game = ({ room, playerName }) => {
   const [showModal, setShowModal] = useState(false);

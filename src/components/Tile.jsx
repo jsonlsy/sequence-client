@@ -10,6 +10,7 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
   const selectedCardCode = useSelector((state) => state.hand.selected);
   const socket = useSelector((state) => state.socket);
   const players = useSelector((state) => state.players);
+  const highlightTile = useSelector((state) => state.board.highlight);
   const dispatch = useDispatch();
 
   const currentColor = players[socket.id] ? players[socket.id].color : null;
@@ -19,16 +20,19 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
         || (isWildcard(selectedCardCode) && !color)
         || (isRemove(selectedCardCode) && color && color !== currentColor));
 
+  let attrClass = isSelected ? 'selected cursor-pointer' : '';
+
+  const highlight = highlightTile && highlightTile.row === rowIndex && highlightTile.col === colIndex;
+
   const play = () => {
     if (!isSelected) return;
     socket.emit('play', { cardCode: selectedCardCode, rowIndex, colIndex });
     dispatch(selectCard(null));
   };
 
-  const attrClass = isSelected ? 'selected cursor-pointer' : '';
-
   return (
     <div className="board-card-container">
+      { highlight && <div className="highlight-layer" /> }
       <div
         className={`playing-card small ${attrClass}`}
         onClick={play}

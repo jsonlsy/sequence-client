@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Tile from './Tile';
 
 const Board = () => {
-  const board = useSelector((state) => state.board);
+  const board = useSelector((state) => state.board.board);
   const turnToPlay = useSelector((state) => state.turn.turnToPlay);
   const status = useSelector((state) => state.status);
   const winner = useSelector((state) => state.winner.winner);

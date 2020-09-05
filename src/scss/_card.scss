@@ -43,15 +43,3 @@
     background: blue;
   }
 }
-
-// $ranks: A 2 3 4;
-// $suits: D C H S;
-
-// @each $rank in $ranks {
-//   @each $suit in $suits {
-//     .card-#{$rank}#{$suit} {
-//       // background: '../assets/cards/#{$rank}#{$suit}.svg';
-//       background-image: url('../assets/cards/#{$rank}#{$suit}.svg');
-//     }
-//   }
-// }
