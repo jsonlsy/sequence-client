@@ -19,6 +19,7 @@ import { updateHand, selectCard } from './redux/modules/hand';
 import { updateStatus } from './redux/modules/status';
 import { updateTurnToPlay } from './redux/modules/turn';
 import { updateWinner } from './redux/modules/winner';
+import { updateDeck } from './redux/modules/deck';
 
 const ENDPOINT = process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : '';
 
@@ -50,6 +51,7 @@ const Game = ({ room, playerName }) => {
         dispatch(updateStatus(gameState.status));
         dispatch(updateTurnToPlay(gameState.turn, gameState.turn === socket.id));
         dispatch(updateWinner(gameState.winner));
+        dispatch(updateDeck(gameState.deck));
       });
 
       socket.on('playerCards', (playerCards) => {

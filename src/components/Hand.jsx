@@ -9,6 +9,7 @@ import { default as PlayingCard } from './Card';
 
 const Hand = () => {
   const cards = useSelector((state) => state.hand.cards);
+  const deck = useSelector((state) => state.deck.deck);
 
   if (!cards) return null;
 
@@ -28,6 +29,12 @@ const Hand = () => {
           }
         </Row>
       </Card.Body>
+      <Card.Footer>
+        <small>
+          Cards in deck:&nbsp;
+          {deck}
+        </small>
+      </Card.Footer>
     </Card>
   );
 };

@@ -8,6 +8,7 @@ import { reducer as statusReducer } from './modules/status';
 import { reducer as turnReducer } from './modules/turn';
 import { reducer as winnerReducer } from './modules/winner';
 import { reducer as roomReducer } from './modules/room';
+import { reducer as deckReducer } from './modules/deck';
 
 const reducers = combineReducers({
   socket: socketReducer,
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   turn: turnReducer,
   winner: winnerReducer,
   room: roomReducer,
+  deck: deckReducer,
 });
 
 export default reducers;
