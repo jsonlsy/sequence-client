@@ -44,8 +44,6 @@ const Game = ({ room, playerName }) => {
       dispatch(setSocket(socket));
 
       socket.on('gameState', (gameState) => {
-        console.log('got gameState event');
-        console.log(gameState);
         dispatch(updatePlayers(gameState.players));
         dispatch(updateBoard(gameState.board));
         dispatch(updateStatus(gameState.status));
@@ -55,7 +53,6 @@ const Game = ({ room, playerName }) => {
       });
 
       socket.on('playerCards', (playerCards) => {
-        console.log('got playerCards event');
         dispatch(selectCard(null));
         dispatch(updateHand(playerCards));
       });
