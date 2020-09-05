@@ -9,7 +9,7 @@ import { isWildcard, isRemove } from '../helpers/cards';
 const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
   const selectedCardCode = useSelector((state) => state.hand.selected);
   const socket = useSelector((state) => state.socket);
-  const players = useSelector((state) => state.players);
+  const players = useSelector((state) => state.players.players);
   const highlightTile = useSelector((state) => state.board.highlight);
   const dispatch = useDispatch();
 

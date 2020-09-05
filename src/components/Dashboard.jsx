@@ -10,7 +10,8 @@ const Dashboard = () => {
   const socket = useSelector((state) => state.socket);
   const winner = useSelector((state) => state.winner.winner);
   const room = useSelector((state) => state.room);
-  const players = useSelector((state) => state.players);
+  const players = useSelector((state) => state.players.players);
+  const admin = useSelector((state) => state.players.admin);
 
   if (!status || !socket) return null;
 
@@ -39,6 +40,7 @@ const Dashboard = () => {
   const renderAlert = () => (
     <div>
       { !hasEvenPlayers && !status.started && <Alert variant="warning"><small>An even number of players required</small></Alert>}
+      { hasEvenPlayers && !status.started && (admin !== socket.id) && <Alert variant="warning"><small>Waiting for admin to start game</small></Alert>}
       { status.started && status.paused && <Alert variant="warning"><small>Missing player(s) - Waiting for player(s) to join</small></Alert>}
     </div>
   );
@@ -56,10 +58,14 @@ const Dashboard = () => {
           <small>{ shareLink }</small>
         </div>
       </Card.Body>
-      <Card.Footer>
-        { !status.started && <Button variant="success" disabled={!hasEvenPlayers} onClick={() => socket.emit('start')}>Start</Button> }
-        { status.started && <Button variant="outline-warning" onClick={() => socket.emit('reset')}>Reset</Button> }
-      </Card.Footer>
+      {
+        admin === socket.id && (
+          <Card.Footer>
+            { !status.started && <Button variant="success" disabled={!hasEvenPlayers} onClick={() => socket.emit('start')}>Start</Button> }
+            { status.started && <Button variant="outline-warning" onClick={() => socket.emit('reset')}>Reset</Button> }
+          </Card.Footer>
+        )
+      }
     </Card>
   );
 };

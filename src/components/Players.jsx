@@ -8,7 +8,8 @@ import { highlightTile, unhighlightTile } from '../redux/modules/board';
 import { isRemove, isWildcard } from '../helpers/cards';
 
 const Players = () => {
-  const players = useSelector((state) => state.players);
+  const players = useSelector((state) => state.players.players);
+  const admin = useSelector((state) => state.players.admin);
   const turn = useSelector((state) => state.turn.turn);
   const socket = useSelector((state) => state.socket);
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const Players = () => {
                   { players[playerId].name }
                 </span>
                 { currentPlayerIndicator(playerId) }
+                { admin === playerId && (<small>(Admin)</small>) }
               </div>
               {
                 players[playerId].lastMove && (

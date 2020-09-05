@@ -13,7 +13,7 @@ import Hand from './components/Hand';
 import Dashboard from './components/Dashboard';
 
 import { setSocket } from './redux/modules/socket';
-import { updatePlayers } from './redux/modules/players';
+import { updatePlayers, updateAdmin } from './redux/modules/players';
 import { updateBoard } from './redux/modules/board';
 import { updateHand, selectCard } from './redux/modules/hand';
 import { updateStatus } from './redux/modules/status';
@@ -60,12 +60,16 @@ const Game = ({ room, playerName }) => {
         dispatch(updateHand(playerCards));
       });
 
-      socket.on('gameError', (errorMsg) => {
-        openModal(errorMsg);
+      socket.on('admin', (admin) => {
+        dispatch(updateAdmin(admin));
       });
 
       socket.on('winner', (winner) => {
         openModal(`${winner} team won!`);
+      });
+
+      socket.on('gameError', (errorMsg) => {
+        openModal(errorMsg);
       });
     });
 
