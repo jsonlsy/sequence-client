@@ -12,6 +12,7 @@ const Dashboard = () => {
   const room = useSelector((state) => state.room);
   const players = useSelector((state) => state.players.players);
   const admin = useSelector((state) => state.players.admin);
+  const score = useSelector((state) => state.score.score);
 
   if (!status || !socket) return null;
 
@@ -45,6 +46,12 @@ const Dashboard = () => {
     </div>
   );
 
+  const renderTeamScore = (color, colorScore) => (
+    <div>
+      <small className="pr-1 text-capitalize">{`${color}: ${colorScore}`}</small>
+    </div>
+  );
+
   return (
     <Card>
       <Card.Body>
@@ -57,6 +64,16 @@ const Dashboard = () => {
           <h6 className="mb-0">Share link: </h6>
           <small>{ shareLink }</small>
         </div>
+        {
+          score && (
+            <div className="mt-2">
+              <h6 className="mb-0">Score: </h6>
+              {
+                Object.keys(score).map((color) => renderTeamScore(color, score[color]))
+              }
+            </div>
+          )
+        }
       </Card.Body>
       {
         admin === socket.id && (

@@ -20,6 +20,7 @@ import { updateStatus } from './redux/modules/status';
 import { updateTurnToPlay } from './redux/modules/turn';
 import { updateWinner } from './redux/modules/winner';
 import { updateDeck } from './redux/modules/deck';
+import { updateScore } from './redux/modules/score';
 
 const ENDPOINT = process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : '';
 
@@ -61,8 +62,9 @@ const Game = ({ room, playerName }) => {
         dispatch(updateAdmin(admin));
       });
 
-      socket.on('winner', (winner) => {
+      socket.on('winner', ({ winner, score }) => {
         openModal(`${winner} team won!`);
+        dispatch(updateScore(score));
       });
 
       socket.on('gameError', (errorMsg) => {

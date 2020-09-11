@@ -9,7 +9,9 @@ import { reducer as turnReducer } from './modules/turn';
 import { reducer as winnerReducer } from './modules/winner';
 import { reducer as roomReducer } from './modules/room';
 import { reducer as deckReducer } from './modules/deck';
+import { reducer as scoreReducer } from './modules/score';
 
+// TODO: refactor redux modules
 const reducers = combineReducers({
   socket: socketReducer,
   players: playersReducer,
@@ -20,6 +22,7 @@ const reducers = combineReducers({
   winner: winnerReducer,
   room: roomReducer,
   deck: deckReducer,
+  score: scoreReducer,
 });
 
 export default reducers;
