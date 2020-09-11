@@ -20,7 +20,7 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
         || (isWildcard(selectedCardCode) && !color)
         || (isRemove(selectedCardCode) && color && color !== currentColor));
 
-  let attrClass = isSelected ? 'selected cursor-pointer' : '';
+  const attrClass = isSelected ? 'selected cursor-pointer' : '';
 
   const highlight = highlightTile && highlightTile.row === rowIndex && highlightTile.col === colIndex;
 
@@ -34,7 +34,7 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
     <div className="board-card-container">
       { highlight && <div className="highlight-layer" /> }
       <div
-        className={`playing-card small ${attrClass}`}
+        className={`playing-card small ${attrClass} ${currentColor}`}
         onClick={play}
         style={{ backgroundImage: `url(/assets/cards/${cardCode}.svg)` }}
       >
