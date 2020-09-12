@@ -17,7 +17,7 @@ import { updatePlayers, updateAdmin } from './redux/modules/players';
 import { updateBoard } from './redux/modules/board';
 import { updateHand, selectCard } from './redux/modules/hand';
 import { updateStatus } from './redux/modules/status';
-import { updateTurnToPlay } from './redux/modules/turn';
+import { updateTurns, updateTurnToPlay } from './redux/modules/turn';
 import { updateWinner } from './redux/modules/winner';
 import { updateDeck } from './redux/modules/deck';
 import { updateScore } from './redux/modules/score';
@@ -49,6 +49,7 @@ const Game = ({ room, playerName }) => {
         dispatch(updateBoard(gameState.board));
         dispatch(updateStatus(gameState.status));
         dispatch(updateTurnToPlay(gameState.turn, gameState.turn === socket.id));
+        dispatch(updateTurns(gameState.turns));
         dispatch(updateWinner(gameState.winner));
         dispatch(updateDeck(gameState.deck));
       });
