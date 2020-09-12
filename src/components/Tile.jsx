@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import useSound from 'use-sound';
 
 import { selectCard } from '../redux/modules/hand';
 import { isWildcard, isRemove } from '../helpers/cards';
@@ -12,6 +13,7 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
   const players = useSelector((state) => state.players.players);
   const highlightTile = useSelector((state) => state.board.highlight);
   const dispatch = useDispatch();
+  const [playSound] = useSound('/assets/sounds/pop-up-off.mp3');
 
   const currentColor = players[socket.id] ? players[socket.id].color : null;
 
@@ -26,6 +28,7 @@ const Tile = ({ cardCode, color, rowIndex, colIndex }) => {
 
   const play = () => {
     if (!isSelected) return;
+    playSound();
     socket.emit('play', { cardCode: selectedCardCode, rowIndex, colIndex });
     dispatch(selectCard(null));
   };
